@@ -1,0 +1,30 @@
+---
+project: crowbar
+default-region: us-east-1
+code-bucket: gordon-crowbar-544fda92
+apps:
+  - gordon.contrib.lambdas
+  - gordon.contrib.s3
+  - hammer-pipeline
+vpcs:
+  quarry-project:
+    security-groups:
+      - sg-7588ba0e
+    subnet-ids:
+      - subnet-78ecc620
+      - subnet-37e9e80a
+      - subnet-c0eefdb6
+contexts:
+  default:
+
+s3:
+  quarrius-input-notify:
+    bucket: quarrius-input
+    notifications:
+      new-world-archive:
+        lambda: hammer-pipeline.extract-world-archive
+        events:
+          - s3:ObjectCreated:*
+        key_filters:
+          prefix: world-archives/
+          suffix: .zip

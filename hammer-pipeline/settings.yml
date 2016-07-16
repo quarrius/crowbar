@@ -1,0 +1,57 @@
+lambdas:
+  extract-world-archive:
+    code: hammer
+    handler: hammer.extract_world_archive
+    memory: 128
+    timeout: 300
+    runtime: python2.7
+    description: Extracts an uploaded world to a bucket
+    # build:
+    # role:
+    vpc: quarry-project
+    # context: default
+    # context-destination: .context
+    # cli-output: True
+    auto-vpc-policy: True
+    auto-run-policy: True
+    policies:
+      quarrius-input-rw:
+        Version: "2012-10-17"
+        Statement:
+          -
+            Action:
+              - "s3:Get*"
+              - "s3:List*"
+            Resource: "arn:aws:s3:::quarrius-input"
+            Effect: "Allow"
+          -
+            Action:
+              - "s3:Get*"
+              - "s3:List*"
+              - "s3:Put*"
+            Resource: "arn:aws:s3:::quarrius-input/world-archives/*"
+            Effect: "Allow"
+          -
+            Action:
+              - "s3:Get*"
+              - "s3:List*"
+              - "s3:Put*"
+            Resource: "arn:aws:s3:::quarrius-input/worlds/*"
+            Effect: "Allow"
+
+  # render_region_heightmap:
+  #   code: hammer
+  #   handler: hammer.render_region_heightmap
+  #   memory: 128
+  #   timeout: 300
+  #   runtime: python2.7
+  #   description: Render a region into an overhead heightmap tile
+  #   # build:
+  #   # role:
+  #   vpc: quarry-project
+  #   # context: default
+  #   # context-destination: .context
+  #   # cli-output: True
+  #   # policies:
+  #   auto-vpc-policy: True
+  #   auto-run-policy: True
