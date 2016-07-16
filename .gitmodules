@@ -1,0 +1,3 @@
+[submodule "hammer-pipeline/hammer"]
+	path = hammer-pipeline/hammer
+	url = https://github.com/quarrius/hammer.git
