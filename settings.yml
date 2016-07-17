@@ -16,6 +16,7 @@ vpcs:
       - subnet-c0eefdb6
 contexts:
   default:
+    DATABASE_URI: ref://DATABASE_URI
 
 s3:
   quarrius-input-notify:
@@ -27,4 +28,3 @@ s3:
           - s3:ObjectCreated:*
         key_filters:
           prefix: world-archives/
-          suffix: .zip
