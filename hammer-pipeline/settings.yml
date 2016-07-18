@@ -6,7 +6,13 @@ lambdas:
     timeout: 300
     runtime: python2.7
     description: Extracts an uploaded world to a bucket
-    # build:
+    build:
+      - "cp -Rf * {target}"
+      - "echo '[install]\nprefix=' > {target}/setup.cfg"
+      - "{pip_path} install -r requirements.txt -q -t {target} {pip_install_extra}"
+      - "{pip_path} install -r hammer/toybox/requirements.txt -q -t {target} {pip_install_extra}"
+      # - "cd {target} && find . -name '*.pyc' -delete"
+
     # role:
     vpc: quarry-project
     # context: default
