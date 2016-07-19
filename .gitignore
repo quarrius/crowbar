@@ -90,3 +90,4 @@ ENV/
 
 # Gordon builds
 _build/
+.precompiled-modules/

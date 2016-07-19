@@ -11,7 +11,8 @@ lambdas:
       - "echo '[install]\nprefix=' > {target}/setup.cfg"
       - "{pip_path} install -r requirements.txt -q -t {target} {pip_install_extra}"
       - "{pip_path} install -r hammer/toybox/requirements.txt -q -t {target} {pip_install_extra}"
-      # - "cd {target} && find . -name '*.pyc' -delete"
+      - "{project_path}/fetch-precompiled-modules.sh {project_path}/.precompiled-modules"
+      - "tar -xzf {project_path}/.precompiled-modules/psycopg2-2.6.1.tar.gz -C {target}"
 
     # role:
     vpc: quarry-project
